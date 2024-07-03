@@ -8,22 +8,25 @@ import { getAnimeResponse } from "@/libs/apiLibs";
 
 const Page = () => {
   const [page, setPage] = useState(1);
-  const [data, setData] = useState([]); 
+  const [data, setData] = useState([]);
 
   const fetchData = async () => {
-    const popular = await getAnimeResponse("top/anime", `limit=8&page=${page}`)
-    setData(popular)
+    const popular = await getAnimeResponse(
+      "top/anime",
+      `limit=24&page=${page}`
+    );
+    setData(popular);
   };
 
   useEffect(() => {
-    fetchData()
-  }, [page])
+    fetchData();
+  }, [page]);
 
   return (
     <>
-      <HeaderMenu title={`Popular Anime Page ${page}`}/>
-      <AnimeList api={data}/>
-      <Pagination page={page} setPage={setPage} pagination={data.pagination}/>
+      <HeaderMenu title={`Popular Anime Page ${page}`} />
+      <AnimeList api={data} />
+      <Pagination page={page} setPage={setPage} pagination={data.pagination} />
     </>
   );
 };
